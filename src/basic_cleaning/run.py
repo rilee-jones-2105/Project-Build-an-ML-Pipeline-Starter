@@ -37,7 +37,7 @@ def go(args):
     # ENTER CODE HERE
 
     # Save the cleaned data
-    df.to_csv('clean_sample.csv',index=False)
+    df.to_csv('clean_data.csv', index=False)
 
     # log the new data.
     artifact = wandb.Artifact(
@@ -45,7 +45,7 @@ def go(args):
      type=args.output_type,
      description=args.output_description,
  )
-    artifact.add_file("clean_sample.csv")
+    artifact.add_file("clean_data.csv")
     run.log_artifact(artifact)
 
 
@@ -56,47 +56,46 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="A very basic data cleaning")
   
     parser.add_argument(
-        "--input_artifact", 
-        type = ## INSERT TYPE HERE: str, float or int,
-        help = ## INSERT DESCRIPTION HERE,
-        required = True
+        "--input_artifact",
+        type=str,
+        help="Name and version of the input W&B artifact",
+        required=True
     )
 
     parser.add_argument(
-        "--output_artifact", 
-        type = ## INSERT TYPE HERE: str, float or int,
-        help = ## INSERT DESCRIPTION HERE,
-        required = True
+        "--output_artifact",
+        type=str,
+        help="Name of the output W&B artifact",
+        required=True
     )
 
     parser.add_argument(
-        "--output_type", 
-        type = ## INSERT TYPE HERE: str, float or int,
-        help = ## INSERT DESCRIPTION HERE,
-        required = True
+        "--output_type",
+        type=str,
+        help="Type of the output W&B artifact",
+        required=True
     )
 
     parser.add_argument(
-        "--output_description", 
-        type = ## INSERT TYPE HERE: str, float or int,
-        help = ## INSERT DESCRIPTION HERE,
-        required = True
+        "--output_description",
+        type=str,
+        help="Description of the cleaned dataset",
+        required=True
     )
 
     parser.add_argument(
-        "--min_price", 
-        type = ## INSERT TYPE HERE: str, float or int,
-        help = ## INSERT DESCRIPTION HERE,
-        required = True
+        "--min_price",
+        type=float,
+        help="Minimum nightly listing price to retain",
+        required=True
     )
 
     parser.add_argument(
         "--max_price",
-        type = ## INSERT TYPE HERE: str, float or int,
-        help = ## INSERT DESCRIPTION HERE,
-        required = True
+        type=float,
+        help="Maximum nightly listing price to retain",
+        required=True
     )
-
 
     args = parser.parse_args()
 
