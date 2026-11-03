@@ -30,11 +30,10 @@ def go(args):
     # Convert last_review to datetime
     df['last_review'] = pd.to_datetime(df['last_review'])
 
-    # Step 6: TODO
-    # Only implement this step when reaching Step 6: Pipeline Release and Updates
-    # in the project.
-    # Add longitude and latitude filter to allow test_proper_boundaries to pass
-    # ENTER CODE HERE
+    # Filter out listings outside the NYC geographic boundaries
+    longitude_idx = df['longitude'].between(-74.25, -73.50)
+    latitude_idx = df['latitude'].between(40.5, 41.2)
+    df = df[longitude_idx & latitude_idx].copy()
 
     # Save the cleaned data
     df.to_csv('clean_data.csv', index=False)
